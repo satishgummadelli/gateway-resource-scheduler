@@ -6,7 +6,10 @@ package com.jpmorgan.interviewtest.gateway.lib;
  * @author Satish Gummadelli
  *
  */
-public abstract class Message {
+
+import java.util.Observable;
+
+public abstract class Message extends Observable{
 	
 	private String group;
 	

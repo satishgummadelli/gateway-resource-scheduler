@@ -9,8 +9,7 @@ public class MessageMock extends Message{
 
 	@Override
 	public void completed() {
-		
-		
+		setChanged();
 	}
 	
 	

@@ -11,3 +11,5 @@
 	- Message is a class - it should be abstract as completed method should be implemented by the 3 rd party ...
  
  	- Added Mock classes for the Gateway and Message 3rd Party classes.
+ 	
+4) Adding Observable to the Message Class and implementing the mock
