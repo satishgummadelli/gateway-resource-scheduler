@@ -1,0 +1,13 @@
+1) First Commit with the intial Maven project setup and pushed to github.
+
+
+2) Adding the maven dependencies, 
+	-junit for testing
+	-powermock for mocking [Why Powermock .. it is an extension to easymock and mockito]
+	-log4j for logging
+
+3)Added 3rd party interfaces and added mock classes for Gateway and Message
+	- Gateway is a interface with send method
+	- Message is a class - it should be abstract as completed method should be implemented by the 3 rd party ...
+ 
+ 	- Added Mock classes for the Gateway and Message 3rd Party classes.
