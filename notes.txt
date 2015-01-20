@@ -12,4 +12,8 @@
  
  	- Added Mock classes for the Gateway and Message 3rd Party classes.
  	
-4) Adding Observable to the Message Class and implementing the mock
+4) Adding Observable to the Message Class and implementing the mock, code checked in
+
+5) completed Schduler class with FIFO implementation
+
+6) Decided to add alternative schedule priority, using Strategy design pattern

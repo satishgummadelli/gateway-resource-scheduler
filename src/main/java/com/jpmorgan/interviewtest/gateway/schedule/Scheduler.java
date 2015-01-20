@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.jpmorgan.interviewtest.gateway.lib.Gateway;
 import com.jpmorgan.interviewtest.gateway.lib.Message;
+import com.jpmorgan.interviewtest.gateway.schedule.strategy.SchedulerStrategy;
 
 /**
  * Scheduler with FIFO implementation
@@ -21,18 +22,20 @@ public class Scheduler implements Observer {
 	private Queue<Message> wait_queue;
 	private Gateway gateway;
 	private AtomicInteger numberOfResources;
+	private SchedulerStrategy schedulerStrategy;
 
-	public Scheduler(int numberOfResources, Gateway g){
+	public Scheduler(int numberOfResources, Gateway gateway, SchedulerStrategy strategy){
 		this.wait_queue = new LinkedBlockingQueue<>();
-		this.gateway = g;
+		this.gateway = gateway;
 		this.numberOfResources = new AtomicInteger(numberOfResources);
+		this.schedulerStrategy = strategy;
 	}
 
 	public Queue<Message> getWaitQueue() {
 		return this.wait_queue;
 	}
 
-	Gateway getGateway() {
+	public Gateway getGateway() {
 		return this.gateway;
 	}
 
@@ -40,7 +43,7 @@ public class Scheduler implements Observer {
 
 		Queue<Message> messagesQueue = new LinkedBlockingQueue<>(Arrays.asList(msgs));
 		while (!messagesQueue.isEmpty()) {
-			Message msg = messagesQueue.element();
+			Message msg = schedulerStrategy.selectFromQueue(this, messagesQueue);
 			messagesQueue.remove(msg);
 			if (numberOfResources.get() > 0) {
 				numberOfResources.decrementAndGet();
@@ -63,7 +66,7 @@ public class Scheduler implements Observer {
 			numberOfResources.incrementAndGet();
 
 			if (this.wait_queue.size() > 0) {
-				Message m = wait_queue.element();
+				Message m = schedulerStrategy.selectFromQueue(this, wait_queue);
 				this.wait_queue.remove(m);
 				this.scheduleMessage(m);
 			}
