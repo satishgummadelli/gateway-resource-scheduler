@@ -10,7 +10,7 @@ import java.util.Queue;
  *
  */
 
-public class GatewayMock {
+public class GatewayMock implements Gateway {
 
 	private Queue<Message> processingQueue = new LinkedList<Message>();
 

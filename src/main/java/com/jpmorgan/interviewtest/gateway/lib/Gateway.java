@@ -1,5 +1,7 @@
 package com.jpmorgan.interviewtest.gateway.lib;
 
+import java.util.Collection;
+
 
 /**
  * 3rd Party Interface Gateway
@@ -8,5 +10,7 @@ package com.jpmorgan.interviewtest.gateway.lib;
  */
 public interface Gateway {
 	public void send(Message msg);
+
+	public Collection<Message> getProcessing();
 
 }
